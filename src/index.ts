@@ -7,12 +7,6 @@ import Image from "./models/Images";
 import { connect } from "mongoose";
 const ExifImage = require("exif").ExifImage;
 import fs from "fs";
-var RateLimit = require('express-rate-limit');
-const limiter = new RateLimit({
-  windowMs: 1*60*1000, // 1 minute
-  max: 5
-});
-
 const cors = require("cors");
 dotenv.config();
 
@@ -24,7 +18,6 @@ const port = process.env.PORT;
 
 app.use("/api/v1", router);
 app.use(json());
-app.use(limiter);
 app.use(
   fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
